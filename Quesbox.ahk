@@ -2,7 +2,11 @@
 #Persistent
 ;SendMode Input
 
-p_runz ="%A_ScriptDir%\runz\RunZ.ahk"
+; 配置文件
+global g_ConfFile := A_ScriptDir . "\Conf.ini"
+global g_Conf := class_EasyIni(g_ConfFile)
+
+global p_runz ="%A_ScriptDir%\runz\RunZ.ahk"
 global p_tc = "d:\Applications\Scoop\apps\totalcmd\current\TOTALCMD.EXE"
 global p_ahk = "d:\Applications\Scoop\apps\autohotkey\current\AutoHotkeyU64.exe"
 
@@ -49,3 +53,5 @@ OpenDir(key,target)
         Run, %target%,, Max
 }
 Return
+
+#include %A_ScriptDir%\lib\EasyIni.ahk
