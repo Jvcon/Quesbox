@@ -9,6 +9,8 @@ global g_Conf := class_EasyIni(g_ConfFile)
 global p_runz ="%A_ScriptDir%\runz\RunZ.ahk"
 global p_tc = "d:\Applications\Scoop\apps\totalcmd\current\TOTALCMD.EXE"
 global p_ahk = "d:\Applications\Scoop\apps\autohotkey\current\AutoHotkeyU64.exe"
+global p_cmder = "D:\Applications\Scoop\apps\cmder\current\cmder.exe"
+global p_wechat = "C:\Program Files (x86)\Tencent\WeChat\WeChat.exe"
 
 Menu, Tray, Icon, %A_ScriptDir%\src\quesbox.ico
 Menu, Tray, Click, 1
@@ -22,6 +24,44 @@ Menu, Tray, NoStandard
 
 Return
 
+;	--------------------------
+;	Application Alias
+;	--------------------------
+
+#`:: 
+	{ 
+		DetectHiddenWindows, on 
+			if WinExist("ahk_exe WeChat.exe")
+				WinActivate, ahk_class WeChatMainWndForPC
+			else 
+				Run, %p_wechat%
+	} 
+	return
+	
+#r:: 
+	{ 
+		DetectHiddenWindows, on 
+			IfWinExist Cmder
+				WinActivate
+			else 
+				Run, %p_cmder%
+	} 
+	return
+
+;	--------------------------
+;	Windows 10 Virtual Desktop
+;	--------------------------
+!`::
+send #{Tab} 
+Return 
+!2::
+send #^{right} 
+return 
+!1::
+send #^{left}
+return
+
+;	启动RunZ
 Run_Runz:
     Run, %p_ahk% "%p_runz%"
 Return
