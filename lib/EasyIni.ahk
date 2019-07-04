@@ -1,5 +1,6 @@
-﻿; http://ahkscript.org/boards/viewtopic.php?f=6&t=5522&hilit=lib+ini
-; Author : Verdlin
+;Uer:Verdlin
+;Link:https://www.autohotkey.com/boards/viewtopic.php?f=6&t=5522&hilit=lib+ini
+
 class_EasyIni(sFile="", sLoadFromStr="")
 {
 	return new EasyIni(sFile, sLoadFromStr)
@@ -114,7 +115,7 @@ class EasyIni
 	CreateIniObj(parms*)
 	{
 		; Define prototype object for ini arrays:
-		static base := {__Set: "EasyIni_Set", _NewEnum: "EasyIni_NewEnum", Remove: "EasyIni_Remove", Insert: "EasyIni_Insert", InsertBefore: "EasyIni_InsertBefore", AddSection: "EasyIni.AddSection", RenameSection: "EasyIni.RenameSection", DeleteSection: "EasyIni.DeleteSection", GetSections: "EasyIni.GetSections", FindSecs: "EasyIni.FindSecs", AddKey: "EasyIni.AddKey", RenameKey: "EasyIni.RenameKey", DeleteKey: "EasyIni.DeleteKey", GetKeys: "EasyIni.GetKeys", FindKeys: "EasyIni.FindKeys", GetVals: "EasyIni.GetVals", FindVals: "EasyIni.FindVals", HasVal: "EasyIni.HasVal", Copy: "EasyIni.Copy", Merge: "EasyIni.Merge", GetFileName: "EasyIni.GetFileName", GetOnlyIniFileName:"EasyIni.GetOnlyIniFileName", IsEmpty:"EasyIni.IsEmpty", Reload: "EasyIni.Reload", GetIsSaved: "EasyIni.GetIsSaved", Save: "EasyIni.Save", ToVar: "EasyIni.ToVar", GetValue: "EasyIni.GetValue"}
+		static base := {__Set: "EasyIni_Set", _NewEnum: "EasyIni_NewEnum", Delete: "Delete", Remove: "EasyIni_Remove", Insert: "EasyIni_Insert", InsertBefore: "EasyIni_InsertBefore", AddSection: "EasyIni.AddSection", RenameSection: "EasyIni.RenameSection", DeleteSection: "EasyIni.DeleteSection", GetSections: "EasyIni.GetSections", FindSecs: "EasyIni.FindSecs", AddKey: "EasyIni.AddKey", RenameKey: "EasyIni.RenameKey", DeleteKey: "EasyIni.DeleteKey", GetKeys: "EasyIni.GetKeys", FindKeys: "EasyIni.FindKeys", GetVals: "EasyIni.GetVals", FindVals: "EasyIni.FindVals", HasVal: "EasyIni.HasVal", Copy: "EasyIni.Copy", Merge: "EasyIni.Merge", GetFileName: "EasyIni.GetFileName", GetOnlyIniFileName:"EasyIni.GetOnlyIniFileName", IsEmpty:"EasyIni.IsEmpty", Reload: "EasyIni.Reload", GetIsSaved: "EasyIni.GetIsSaved", Save: "EasyIni.Save", ToVar: "EasyIni.ToVar"}
 		; Create and return new object:
 		return Object("_keys", Object(), "base", base, parms*)
 	}
@@ -141,10 +142,12 @@ class EasyIni
 			rsError := "Error! Could not rename section [" sOldSec "], because it does not exist."
 			return false
 		}
+		if (sOldSec = sNewSec) ; EasyIni is case-insensitve.
+			return true ; true because the rename is harmless.
 
-		aKeyValsCopy := this[sOldSec]
+		this[sNewSec] := this[sOldSec]
 		this.DeleteSection(sOldSec)
-		this[sNewSec] := aKeyValsCopy
+
 		return true
 	}
 
@@ -216,7 +219,7 @@ class EasyIni
 
 	DeleteKey(sec, key)
 	{
-		this[sec].Remove(key)
+		this[sec].Delete(key)
 		return
 	}
 
@@ -272,11 +275,6 @@ class EasyIni
 			Sort, vals, D%sDelim% %sSort%
 
 		return vals
-	}
-
-	GetValue(sec, key)
-	{
-		return this[sec, key]
 	}
 
 	FindVals(sec, sExp, iMaxVals="")
@@ -347,7 +345,7 @@ class EasyIni
 	{
 		; TODO: Perhaps just save one ini, read it back in, and then perform merging? I think this would help with formatting.
 		; [Sections]
-		for sec, aKeysAndVals in vOtherIni
+		for sec, aKeysToVals in vOtherIni
 		{
 			if (!this.HasKey(sec))
 				if (bRemoveNonMatching)
@@ -355,7 +353,7 @@ class EasyIni
 				else this.AddSection(sec)
 
 			; key=val
-			for key, val in aKeysAndVals
+			for key, val in aKeysToVals
 			{
 				bMakeException := vExceptionsIni[sec].HasKey(key)
 
@@ -458,8 +456,7 @@ class EasyIni
 		}
 
 		; Formatting is preserved in ini object.
-		; FileDelete, %sFile%
-		FileMove, %sFile%, %sFile%.EasyIni.bak
+		FileDelete, %sFile%
 
 		bIsFirstLine := true
 		for k, v in this.EasyIni_ReservedFor_TopComments
@@ -468,13 +465,13 @@ class EasyIni
 			bIsFirstLine := false
 		}
 
-		for section, aKeysAndVals in this
+		for section, aKeysToVals in this
 		{
 			FileAppend, % (bIsFirstLine ? "[" : "`n[") section "]", %sFile%
 			bIsFirstLine := false
 
 			bEmptySection := true
-			for key, val in aKeysAndVals
+			for key, val in aKeysToVals
 			{
 				bEmptySection := false
 				FileAppend, `n%key%=%val%, %sFile%
@@ -492,8 +489,6 @@ class EasyIni
 					FileAppend, % "`n" (A_LoopField == Chr(14) ? "" : A_LoopField), %sFile%
 			}
 		}
-
-		FileDelete, %sFile%.EasyIni.bak
 		return true
 	}
 
@@ -513,7 +508,7 @@ class EasyIni
 EasyIni_CreateBaseObj(parms*)
 {
 	; Define prototype object for ordered arrays:
-	static base := {__Set: "EasyIni_Set", _NewEnum: "EasyIni_NewEnum", Remove: "EasyIni_Remove", Insert: "EasyIni_Insert", InsertBefore: "EasyIni_InsertBefore"}
+	static base := {__Set: "EasyIni_Set", _NewEnum: "EasyIni_NewEnum", Delete: "Delete", Remove: "EasyIni_Remove", Insert: "EasyIni_Insert", InsertBefore: "EasyIni_InsertBefore"}
 	; Create and return new base object:
 	return Object("_keys", Object(), "base", base, parms*)
 }
