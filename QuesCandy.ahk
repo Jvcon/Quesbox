@@ -20,9 +20,6 @@ AutoTrim,on                                                                     
 SetCapsLockState, AlwaysOff                                                             ;For Capslock,set the State AlwaysOFF
 
 ; DetectHiddenWindows, On
-; SetWinDelay, -1 ; Remove short delay done automatically after every windowing command except IfWinActive and IfWinExist
-; SetKeyDelay, -1, -1 ; Remove short delay done automatically after every keystroke sent by Send or ControlSend
-; SetMouseDelay, -1 ; Remove short delay done automatically after Click and MouseMove/Click/Drag
 
 ;====================================================================o
 ;                       Value Init
@@ -36,13 +33,14 @@ global Ky_AskRunAsAdmin:=0
 
 ; Capslock Mode
 
-global Ky_Capslocks:=1
-global Ky_CapslocksMode:=0
+global Ky_CapslockX:=1
+global Ky_CapslockXMode:=0
+global ky_CapslockX_FnActed:= 0
 global Ky_Mode_Normal:=0
 global Ky_Mode_Fn:=1
-global Ky_Mode_Capslocks:=2
+global Ky_Mode_CapslockX:=2
 global Ky_Mode_Fns:=3
-global Ky_LastLightStae:= ((Ky_CapslocksMode & Ky_Mode_Capslocks) || (Ky_CapslocksMode & Ky_Mode_Fn))
+global Ky_LastLightStae:= ((Ky_CapslockXMode & Ky_Mode_CapslockX) || (Ky_CapslockXMode & Ky_Mode_Fn))
 
 ; Candy Mode
 global szMenuIdx:={}                 ;菜单用1
@@ -106,12 +104,12 @@ for key, label in g_Conf.Candy
     }
 }
 
-
 ;====================================================================o
 ;                       Tray Menu
 ;====================================================================o
 
 Menu, Tray, UseErrorLevel
+
 Sub_CreateTrayMenu()
 
 Return
@@ -122,10 +120,11 @@ Return
 
 Sub_CreateTrayMenu()
 {
+	
     Menu, Tray, Icon, %A_ScriptDir%\src\quesbox.ico
     Menu, Tray, Click, 1
     Menu, Tray, Tip, QuesBox
-    Menu, Tray, Add
+    ;Menu, Tray, Add
     Menu, tray, add, 编辑全局配置,TrayHandle_GeneralSettings
     Menu, Tray, Add, Directory(&D), TrayHandle_OpenSourceDir
     Menu, Tray, Add, Restart(&B)`tCtrl + Alt + R, TrayHandle_ReLoad
@@ -177,6 +176,7 @@ Return
 #include %A_ScriptDir%\lib\EasyIni.ahk
 #include %A_ScriptDir%\plugins\Windows10.ahk
 #include %A_ScriptDir%\plugins\Applications.ahk
+#include %A_ScriptDir%\plugins\CapslockX.ahk
 #include %A_ScriptDir%\plugins\Candy.ahk
 #include %A_ScriptDir%\plugins\Cando_Rename.ahk
 #include %A_ScriptDir%\plugins\Cando_MoveAndCopy.ahk
