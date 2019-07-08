@@ -3,7 +3,7 @@
 */
 
 #SingleInstance, Force                                                                  ;Single Running
-    #MaxThreadsPerHotkey, 9                                                                 ; 最大热键数量
+    #MaxThreadsPerHotkey, 300                                                                 ; 最大热键数量
 #WinActivateForce                                                                       ;强制激活窗体
     #ClipboardTimeout 500                                                                   ;首次访问剪贴板失败后继续尝试访问剪贴板的持续时间
 
@@ -24,17 +24,35 @@ SetCapsLockState, AlwaysOff                                                     
 ; SetKeyDelay, -1, -1 ; Remove short delay done automatically after every keystroke sent by Send or ControlSend
 ; SetMouseDelay, -1 ; Remove short delay done automatically after Click and MouseMove/Click/Drag
 
-/*
-;	Configuration
-*/
+;====================================================================o
+;                       Value Init
+;====================================================================o
 
 ; Startup Status
 global Ky_RunWithSystem:=0 
+
+; Run As Admin
+global Ky_AskRunAsAdmin:=0
+
+; Capslock Mode
+
+global Ky_Capslocks:=1
+global Ky_CapslocksMode:=0
+global Ky_Mode_Normal:=0
+global Ky_Mode_Fn:=1
+global Ky_Mode_Capslocks:=2
+global Ky_Mode_Fns:=3
+global Ky_LastLightStae:= ((Ky_CapslocksMode & Ky_Mode_Capslocks) || (Ky_CapslocksMode & Ky_Mode_Fn))
+
+; Candy Mode
 global szMenuIdx:={}                 ;菜单用1
 global szMenuContent:={}         ;菜单用2
 global szMenuWhichFile:={}      ;菜单用3
 
-; Configuration File
+;====================================================================o
+;                       Configuration File
+;====================================================================o
+
 global g_ConfFile := A_ScriptDir . "\config\GeneralSettings.ini"
 
 if !FileExist(g_ConfFile)
@@ -44,9 +62,9 @@ if !FileExist(g_ConfFile)
 
 global g_Conf := class_EasyIni(g_ConfFile)
 
-/*
-;	Enviroment Init
-*/
+;====================================================================o
+;                       Enviroment Init
+;====================================================================o
 
 for key, label in g_Conf.MyVar
 {
@@ -56,10 +74,9 @@ for key, label in g_Conf.MyVar
         %MyVar_Key%=%MyVar_Val%                                                
 }
 
-
-/*
-;	Hotkey Binding
-*/
+;====================================================================o
+;                       Hotkey Binding
+;====================================================================o
 
 for key, label in g_Conf.Hotkeys
 {
@@ -89,6 +106,12 @@ for key, label in g_Conf.Candy
     }
 }
 
+
+;====================================================================o
+;                       Tray Menu
+;====================================================================o
+
+Menu, Tray, UseErrorLevel
 Sub_CreateTrayMenu()
 
 Return
@@ -154,5 +177,8 @@ Return
 #include %A_ScriptDir%\lib\EasyIni.ahk
 #include %A_ScriptDir%\plugins\Windows10.ahk
 #include %A_ScriptDir%\plugins\Applications.ahk
-#include %A_ScriptDir%\plugins\Capslock.ahk
 #include %A_ScriptDir%\plugins\Candy.ahk
+#include %A_ScriptDir%\plugins\Cando_Rename.ahk
+#include %A_ScriptDir%\plugins\Cando_MoveAndCopy.ahk
+#include %A_ScriptDir%\plugins\Cando_Clipnote.ahk
+#include %A_ScriptDir%\plugins\Cando_Create.ahk
