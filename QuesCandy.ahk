@@ -33,19 +33,19 @@ global Ky_AskRunAsAdmin:=0
 
 ; Capslock Mode
 
-global Ky_CapslockX:=1
-global Ky_CapslockXMode:=0
-global ky_CapslockX_FnActed:= 0
-global Ky_Mode_Normal:=0
-global Ky_Mode_Fn:=1
-global Ky_Mode_CapslockX:=2
-global Ky_Mode_Fns:=3
-global Ky_LastLightStae:= ((Ky_CapslockXMode & Ky_Mode_CapslockX) || (Ky_CapslockXMode & Ky_Mode_Fn))
+; global Ky_CapslockX:=1          ;Capslock key pressed status
+global Ky_CapslockXMode:=0      ;Mode status
+global ky_CapslockX_FnActed:= 0 ;
+global Ky_Mode_Normal:=0        ;Mode Normal
+global Ky_Mode_Fn:=1            ;Mode Fn
+global Ky_Mode_CapslockX:=2     ;Mode CapslockX
+global Ky_Mode_Fns:=3           ;Mode Fns
+global Ky_LastLightStae:= ((Ky_CapslockXMode & Ky_Mode_CapslockX) || (Ky_CapslockXMode & Ky_Mode_Fn))   ;Light Status
 
 ; Candy Mode
-global szMenuIdx:={}                 ;菜单用1
+global szMenuIdx:={}             ;菜单用1
 global szMenuContent:={}         ;菜单用2
-global szMenuWhichFile:={}      ;菜单用3
+global szMenuWhichFile:={}       ;菜单用3
 
 ;====================================================================o
 ;                       Configuration File
@@ -104,9 +104,14 @@ for key, label in g_Conf.Candy
     }
 }
 
+; Hotkey ScrollLock, Capslock_Set
+; Hotkey *CapsLock, CapslockX_Dn
+; Hotkey *CapsLock Up, CapslockX_Up
+
 ;====================================================================o
 ;                       Tray Menu
 ;====================================================================o
+UpdateCapslockXMode()
 
 Menu, Tray, UseErrorLevel
 
@@ -174,9 +179,9 @@ Return
 
 
 #include %A_ScriptDir%\lib\EasyIni.ahk
-#include %A_ScriptDir%\plugins\Windows10.ahk
-#include %A_ScriptDir%\plugins\Applications.ahk
 #include %A_ScriptDir%\plugins\CapslockX.ahk
+#include %A_ScriptDir%\plugins\Windows10.ahk
+;#include %A_ScriptDir%\plugins\Applications.ahk
 #include %A_ScriptDir%\plugins\Candy.ahk
 #include %A_ScriptDir%\plugins\Cando_Rename.ahk
 #include %A_ScriptDir%\plugins\Cando_MoveAndCopy.ahk
