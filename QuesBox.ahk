@@ -24,9 +24,6 @@ if !FileExist(g_ConfFile)
 
 global g_Conf := class_EasyIni(g_ConfFile)
 
-global load_capslocks := g_Conf.Module.Capslocks
-global load_candy := g_Conf.Module.Candy
-
 global CapslocksStatus :=  0
 global CapslocksFnActed := 0
 global Mode_Normal := 0
@@ -60,7 +57,7 @@ for key, label in g_Conf.Global_Hotkeys
         Hotkey, %key%, Off
     }
 }
-If (load_candy){
+If (g_Conf.Module.Candy){
     for key, label in g_Conf.Candy{
         if (label != "Default"){
             Hotkey, %key%, Label_Candy_Start, ,On, UseErrorLevel
@@ -72,7 +69,7 @@ If (load_candy){
         }
     }
 }
-If (load_capslocks){
+If (g_Conf.Module.Capslocks){
     for key, label in g_Conf.Capslocks{
         if (label != "Default"){
             Hotkey, %key%, %label%, ,On, UseErrorLevel
@@ -93,16 +90,18 @@ Return
     #Include %A_ScriptDir%\plugins\Tray.ahk
 
 #If
-    If (load_capslocks){
+    If (g_Conf.Module.Capslocks){
         #Include %A_ScriptDir%\plugins\Capslocks.ahk
-        #Include %A_ScriptDir%\plugins\Windows10.ahk
-
+        #Include %A_ScriptDir%\plugins\Capslocks_Windows10.ahk
+        #Include %A_ScriptDir%\plugins\Capslocks_mstsc.ahk
+        #Include %A_ScriptDir%\plugins\Capslocks_edit.ahk
     }
 ; #If
 ;     #Include %A_ScriptDir%\plugins\Windows10.ahk
 #If
-    If (load_candy){
+    If (g_Conf.Module.Candy){
         #Include %A_ScriptDir%\plugins\Candy.ahk
+        #Include %A_ScriptDir%\plugins\Cando_OpenwithTC.ahk
         #Include %A_ScriptDir%\plugins\Cando_Rename.ahk
         #Include %A_ScriptDir%\plugins\Cando_MoveAndCopy.ahk
         #Include %A_ScriptDir%\plugins\Cando_Clipnote.ahk
