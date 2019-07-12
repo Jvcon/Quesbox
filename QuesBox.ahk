@@ -37,6 +37,10 @@ global szMenuIdx := {}             ;菜单用1
 global szMenuContent := {}         ;菜单用2
 global szMenuWhichFile := {}       ;菜单用3
 
+
+global love        := chr(9829)
+global copyright   := chr(169)
+
 for key, label in g_Conf.MyVar
 {
     MyVar_Key:= RegExReplace(key, "(^\s*)|(\s*$)" )                                         ;用户自定义变量的key
@@ -88,6 +92,7 @@ Return
 #If
     #Include %A_ScriptDir%\lib\EasyIni.ahk
     #Include %A_ScriptDir%\plugins\Tray.ahk
+    #Include %A_ScriptDir%\plugins\HashCalc.ahk
 
 #If
     If (g_Conf.Module.Capslocks){

@@ -15,81 +15,71 @@
 ;@Ahk2Exe-SetOrigFilename HashCalc.ahk
 ; ===================================================================================
 
-; GLOBAL SETTINGS ===================================================================
-
-#Warn
-#NoEnv
-#SingleInstance Force
-SetBatchLines, -1
-
-global name        := "HashCalc"
-global version     := "v0.9"
-global love        := chr(9829)
-global copyright   := chr(169)
-
 ; SCRIPT ============================================================================
+ShowHashWindow:
+    Gui, hashcalcGui: New
+    Gui, hashcalcGui: Margin, 10, 10
+    Gui, hashcalcGui: Font, s9, Courier New
+    Gui, hashcalcGui: Add, Text, xm ym w100, Data Format:
+    Gui, hashcalcGui: Add, Text, x+10 ym w390, Data:
+    Gui, hashcalcGui: Add, DropDownList, xm y+6 w100 AltSubmit vDDL, Text String||Hex|File
+    Gui, hashcalcGui: Add, Edit, x+10 yp w390 vStr,
+    Gui, hashcalcGui: Add, Button, x+3 yp w80 h23 gFile vFile, File
+    Gui, hashcalcGui: Add, Checkbox, xm y+6 w100 h23 vCheck, HMAC
+    Gui, hashcalcGui: Add, Edit, x+10 yp w390 vHMAC,
+    Gui, hashcalcGui: Add, Text, xm y+10 w586 h1 0x10
 
-Gui, Margin, 10, 10
-Gui, Font, s9, Courier New
-Gui, Add, Text, xm ym w100, Data Format:
-Gui, Add, Text, x+10 ym w390, Data:
-Gui, Add, DropDownList, xm y+6 w100 AltSubmit vDDL, Text String||Hex|File
-Gui, Add, Edit, x+10 yp w390 vStr,
-Gui, Add, Button, x+3 yp w80 h23 gFile vFile, File
-Gui, Add, Checkbox, xm y+6 w100 h23 vCheck, HMAC
-Gui, Add, Edit, x+10 yp w390 vHMAC,
-Gui, Add, Text, xm y+10 w586 h1 0x10
+    Gui, hashcalcGui: Add, Checkbox, xm y+10 w100 h23 vCheckCRC32, CRC32
+    Gui, hashcalcGui: Add, Edit, x+10 yp w390 0x800 vCRC32,
+    Gui, hashcalcGui: Add, Button, x+3 yp w80 h23 gCopyCRC32 vCopyCRC32, Copy
 
-Gui, Add, Checkbox, xm y+10 w100 h23 vCheckCRC32, CRC32
-Gui, Add, Edit, x+10 yp w390 0x800 vCRC32,
-Gui, Add, Button, x+3 yp w80 h23 gCopyCRC32 vCopyCRC32, Copy
+    Gui, hashcalcGui: Add, Checkbox, xm y+6 w100 h23 vCheckMD2, MD2
+    Gui, hashcalcGui: Add, Edit, x+10 yp w390 0x800 vMD2,
+    Gui, hashcalcGui: Add, Button, x+3 yp w80 h23 gCopyMD2 vCopyMD2, Copy
 
-Gui, Add, Checkbox, xm y+6 w100 h23 vCheckMD2, MD2
-Gui, Add, Edit, x+10 yp w390 0x800 vMD2,
-Gui, Add, Button, x+3 yp w80 h23 gCopyMD2 vCopyMD2, Copy
+    Gui, hashcalcGui: Add, Checkbox, xm y+6 w100 h23 vCheckMD4, MD4
+    Gui, hashcalcGui: Add, Edit, x+10 yp w390 0x800 vMD4,
+    Gui, hashcalcGui: Add, Button, x+3 yp w80 h23 gCopyMD4 vCopyMD4, Copy
 
-Gui, Add, Checkbox, xm y+6 w100 h23 vCheckMD4, MD4
-Gui, Add, Edit, x+10 yp w390 0x800 vMD4,
-Gui, Add, Button, x+3 yp w80 h23 gCopyMD4 vCopyMD4, Copy
+    Gui, hashcalcGui: Add, Checkbox, xm y+6 w100 h23 Checked vCheckMD5, MD5
+    Gui, hashcalcGui: Add, Edit, x+10 yp w390 0x800 vMD5,
+    Gui, hashcalcGui: Add, Button, x+3 yp w80 h23 gCopyMD5 vCopyMD5, Copy
 
-Gui, Add, Checkbox, xm y+6 w100 h23 Checked vCheckMD5, MD5
-Gui, Add, Edit, x+10 yp w390 0x800 vMD5,
-Gui, Add, Button, x+3 yp w80 h23 gCopyMD5 vCopyMD5, Copy
+    Gui, hashcalcGui: Add, Checkbox, xm y+6 w100 h23 Checked vCheckSHA, SHA-1
+    Gui, hashcalcGui: Add, Edit, x+10 yp w390 0x800 vSHA,
+    Gui, hashcalcGui: Add, Button, x+3 yp w80 h23 gCopySHA vCopySHA, Copy
 
-Gui, Add, Checkbox, xm y+6 w100 h23 Checked vCheckSHA, SHA-1
-Gui, Add, Edit, x+10 yp w390 0x800 vSHA,
-Gui, Add, Button, x+3 yp w80 h23 gCopySHA vCopySHA, Copy
+    Gui, hashcalcGui: Add, Checkbox, xm y+6 w100 h23 vCheckSHA2, SHA-256
+    Gui, hashcalcGui: Add, Edit, x+10 yp w390 0x800 vSHA2,
+    Gui, hashcalcGui: Add, Button, x+3 yp w80 h23 gCopySHA2 vCopySHA2, Copy
 
-Gui, Add, Checkbox, xm y+6 w100 h23 vCheckSHA2, SHA-256
-Gui, Add, Edit, x+10 yp w390 0x800 vSHA2,
-Gui, Add, Button, x+3 yp w80 h23 gCopySHA2 vCopySHA2, Copy
+    Gui, hashcalcGui: Add, Checkbox, xm y+6 w100 h23 vCheckSHA3, SHA-384
+    Gui, hashcalcGui: Add, Edit, x+10 yp w390 0x800 vSHA3,
+    Gui, hashcalcGui: Add, Button, x+3 yp w80 h23 gCopySHA3 vCopySHA3, Copy
 
-Gui, Add, Checkbox, xm y+6 w100 h23 vCheckSHA3, SHA-384
-Gui, Add, Edit, x+10 yp w390 0x800 vSHA3,
-Gui, Add, Button, x+3 yp w80 h23 gCopySHA3 vCopySHA3, Copy
+    Gui, hashcalcGui: Add, Checkbox, xm y+6 w100 h23 vCheckSHA5, SHA-512
+    Gui, hashcalcGui: Add, Edit, x+10 yp w390 0x800 vSHA5,
+    Gui, hashcalcGui: Add, Button, x+3 yp w80 h23 gCopySHA5 vCopySHA5, Copy
+    Gui, hashcalcGui: Add, Text, xm y+10 w586 h1 0x10
 
-Gui, Add, Checkbox, xm y+6 w100 h23 vCheckSHA5, SHA-512
-Gui, Add, Edit, x+10 yp w390 0x800 vSHA5,
-Gui, Add, Button, x+3 yp w80 h23 gCopySHA5 vCopySHA5, Copy
-Gui, Add, Text, xm y+10 w586 h1 0x10
+    Gui, hashcalcGui: Add, Text, xm y+10 w100 h23 0x200, Verify
+    Gui, hashcalcGui: Add, Edit, x+10 yp w390 vVerify,
+    Gui, hashcalcGui: Add, Edit, x+3 yp w80 0x201 0x800 vHashOK,
+    Gui, hashcalcGui: Add, Text, xm y+10 w586 h1 0x10
 
-Gui, Add, Text, xm y+10 w100 h23 0x200, Verify
-Gui, Add, Edit, x+10 yp w390 vVerify,
-Gui, Add, Edit, x+3 yp w80 0x201 0x800 vHashOK,
-Gui, Add, Text, xm y+10 w586 h1 0x10
+    Gui, hashcalcGui: Font, cSilver,
+    Gui, hashcalcGui: Add, Text, xm y+10 w300 h21 0x200, made with %love% and AHK 2013-%A_YYYY%, jNizM
+    Gui, hashcalcGui: Font,,
+    Gui, hashcalcGui: Add, Button, x+36 yp-1 w80 gCalculate, Calculate
+    Gui, hashcalcGui: Add, Button, x+3 yp w80 gClear, Clear
+    Gui, hashcalcGui: Add, Button, x+3 yp w80 gClose, Close
 
-Gui, Font, cSilver,
-Gui, Add, Text, xm y+10 w300 h21 0x200, made with %love% and AHK 2013-%A_YYYY%, jNizM
-Gui, Font,,
-Gui, Add, Button, x+36 yp-1 w80 gCalculate, Calculate
-Gui, Add, Button, x+3 yp w80 gClear, Clear
-Gui, Add, Button, x+3 yp w80 gClose, Close
+    ; Gui, hashcalcGui: Show, AutoSize, HashCalc
 
-Gui, Show, AutoSize, %name% %version%
-
-SetTimer, CheckEdit, 100
-SetTimer, VerifyHash, 200
+    SetTimer, CheckEdit, 100
+    SetTimer, VerifyHash, 200
 return
+
 
 GuiDropFiles:
     FilePath := A_GuiEvent
@@ -512,7 +502,10 @@ FileCRC32(sFile := "", cSz := 4)
 
 
 ; EXIT ==============================================================================
+ShowHashCalc:
+    Gui, hashcalcGui: Show, AutoSize, HashCalc
+Return
 
 Close:
-GuiClose:
-    exitapp
+    Gui, hashcalcGui: Show,Hide
+Return

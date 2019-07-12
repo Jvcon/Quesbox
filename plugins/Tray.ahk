@@ -6,9 +6,10 @@
     Menu, Tray, Tip, QuesBox
     ;Menu, Tray, Add
     Menu, tray, add, 编辑全局配置,TrayHandle_GeneralSettings
+    Menu, tray, add, Hash Calc(&C),HashCalc
     Menu, Tray, Add, Directory(&D), TrayHandle_OpenSourceDir
-    Menu, Tray, Add, Restart(&B)`tCtrl + Alt + R, TrayHandle_ReLoad
-    Menu, Tray, Add, Exit(&X)`tCtrl + Alt + X, TrayHandle_Exit
+    Menu, Tray, Add, Restart(&R)`tCtrl + Alt + R, TrayHandle_ReLoad
+    Menu, Tray, Add, Exit(&E)`tCtrl + Alt + X, TrayHandle_Exit
     Menu, Tray, NoStandard 
 }
 
@@ -35,7 +36,10 @@ Return
 /*
 ;   Functions
 */
-
+HashCalc:
+    Gosub ShowHashWindow
+    Gosub ShowHashCalc
+Return
 /*
 ;   Open Directory
 */
