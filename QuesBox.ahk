@@ -111,4 +111,5 @@ Return
         #Include %A_ScriptDir%\plugins\Cando_MoveAndCopy.ahk
         #Include %A_ScriptDir%\plugins\Cando_Clipnote.ahk
         #Include %A_ScriptDir%\plugins\Cando_Create.ahk
+        #Include %A_ScriptDir%\plugins\Cando_Hash.ahk
     }
