@@ -32,7 +32,6 @@ cando_OpenwithTC:
     DetectHiddenWindows,on
     tc_exe=%tc%
     wincmd_ini=%tc_ini%
-    OutputDebug %1%
     SplitPath,tc_exe,,tc_dir
     ;~ GetKeyState, state, Shift
     GetKeyState, state, ScrollLock,T
@@ -41,28 +40,19 @@ cando_OpenwithTC:
     ;state=U Shift key is Up.用左侧打开
 
     ;用特殊的0变量判断，调用者所传过来的需要打开的路径
-    If 0 > 0
-    {
-        targetPath=%1%
-    }
-    Else
-    {
-        targetPath=%tc_dir%
-    }
+    targetPath=%CandySel%
     If (SubStr(Trim(targetPath),0)!="`\")
         targetPath.="`\"
-
     ;检验配置并得到正确的tabs信息存储位置
     tabs_ini:=getTabs_ini(tc_exe,wincmd_ini)
-
     OutputDebug,  %tabs_ini%
     IfExist,%tabs_ini%
     {
-        Loop,10
-        {
-            sendTCCommand(580,1 ) ;保存配置,582保存文件夹历史记录
+        ; Loop,10
+        ; {
+            sendTCCommand(580,0 ) ;保存配置,582保存文件夹历史记录
             Sleep,200
-        }until (checkTime(tabs_ini))
+        ; }until (checkTime(tabs_ini))
     }
     Else
     {
@@ -71,34 +61,54 @@ cando_OpenwithTC:
     }
 
     isFinded=-1
-    If state = D ;在右侧检测
-    {
-        rightArray:=getRightArray(tabs_ini)  ;必须用:=不能用用=
-        printArray(RightArray)
-        for index, element in rightArray
-        {
-        If  targetPath=%element%
-            {
-            isFinded=2
-            TargetNum:=5300+index+1
-            OutputDebug,在右侧检测到%element%,激活%TargetNum%
-            }
-        }
+    rightArray:=getRightArray(tabs_ini)  ;必须用:=不能用用=
+    printArray(RightArray)
+    for index, element in rightArray{
+      If targetPath=%element%
+      {
+          isFinded:=2
+          TargetNum:=5300+index+1
+          OutputDebug,在右侧检测到%element%,激活%TargetNum%
+      }
     }
-    Else
-    {
-        leftArray:=getLeftArray(tabs_ini)
-        printArray(leftArray)
-        for index, element in leftArray
-        {
-        If  targetPath=%element%
-            {
-            isFinded=1
-            TargetNum:=5200+index+1
-            OutputDebug,在左侧检测到%element%,激活%TargetNum%
-            }
-        }
+    leftArray:=getLeftArray(tabs_ini)
+    printArray(leftArray)
+    for index, element in leftArray{
+      If  targetPath=%element%
+      {
+          isFinded:=1
+          TargetNum:=5200+index+1
+          OutputDebug ,在左侧检测到%element%,激活%TargetNum%
+      }
     }
+    ; If state = D ;在右侧检测
+    ; {
+    ;     rightArray:=getRightArray(tabs_ini)  ;必须用:=不能用用=
+    ;     printArray(RightArray)
+    ;     for index, element in rightArray
+    ;     {
+    ;     If  targetPath=%element%
+    ;         {
+    ;         isFinded=2
+    ;         TargetNum:=5300+index+1
+    ;         OutputDebug,在右侧检测到%element%,激活%TargetNum%
+    ;         }
+    ;     }
+    ; }
+    ; Else
+    ; {
+    ;     leftArray:=getLeftArray(tabs_ini)
+    ;     printArray(leftArray)
+    ;     for index, element in leftArray
+    ;     {
+    ;     If  targetPath=%element%
+    ;         {
+    ;         isFinded=1
+    ;         TargetNum:=5200+index+1
+    ;         OutputDebug,在左侧检测到%element%,激活%TargetNum%
+    ;         }
+    ;     }
+    ; }
 
     If  isFinded>0
     {
@@ -172,7 +182,7 @@ getRightArray(tabs_ini)
             Break
           }
       }
-    IniRead, Righttabs_Section, %tabs_ini%, Righttabs
+    IniRead, Righttabs_Section, %tabs_ini%, righttabs
     RightHas:=-1
     RightActiveTabNum:=-1
     RightArray := Object()
