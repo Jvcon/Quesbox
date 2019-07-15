@@ -7,6 +7,7 @@
     ;Menu, Tray, Add
     Menu, tray, add, 编辑全局配置,TrayHandle_GeneralSettings
     Menu, tray, add, Hash Calc(&C),HashCalc
+    Menu, tray, add, Todo(&T),Todos
     Menu, Tray, Add, Directory(&D), TrayHandle_OpenSourceDir
     Menu, Tray, Add, Restart(&R)`tCtrl + Alt + R, TrayHandle_ReLoad
     Menu, Tray, Add, Exit(&E)`tCtrl + Alt + X, TrayHandle_Exit
@@ -17,8 +18,10 @@
 ;   Tray Handle
 */
 TrayHandle_OpenSourceDir:
-    path = "%A_ScriptDir%"
-    OpenDir(1,path)
+    target = "%A_ScriptDir%"
+    GetKeyState, state, Shift, T
+    ToolTip %state%
+    OpenDir(target,1,state)
 Return
 
 TrayHandle_GeneralSettings:
@@ -36,22 +39,13 @@ Return
 /*
 ;   Functions
 */
-HashCalc:
-    Gosub ShowHashWindow
+HashCalc:  
     Gosub ShowHashCalc
+Return
+
+Todos:
+    ShowTodo()
 Return
 /*
 ;   Open Directory
 */
-
-OpenDir(key,target)
-{
-    if key = 1
-    {
-        tc_cmd = %tc% /O /T /R=%target%
-        Run, %tc_cmd%
-    }
-    Else
-        Run, %target%,, Max
-}
-Return

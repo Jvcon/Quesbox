@@ -16,10 +16,6 @@
 ; ===================================================================================
 
 ; SCRIPT ============================================================================
-
-global love        := chr(9829)
-global copyright   := chr(169)
-
 ShowHashWindow:
     Gui, hashcalcGui: New
     Gui, hashcalcGui: Margin, 10, 10
@@ -507,6 +503,7 @@ FileCRC32(sFile := "", cSz := 4)
 
 ; EXIT ==============================================================================
 ShowHashCalc:
+    Gosub ShowHashWindow
     Gui, hashcalcGui: Show, AutoSize, HashCalc
 Return
 
