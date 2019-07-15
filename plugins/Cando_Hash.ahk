@@ -5,8 +5,8 @@
         Hash := CalcStringHash(CandySel, 0x8001, encoding = "UTF-8")
     }
     if type=="MD4"
-    {
-         Hash := CalcStringHash(CandySel, 0x8002, encoding = "UTF-8")
+    {   
+        Hash := CalcStringHash(CandySel, 0x8002, encoding = "UTF-8")
     }
     if type=="MD5"
     {
@@ -63,6 +63,6 @@ cando_fileHash:
     {
         Hash := CalcFileHash(CandySel, 0x800e, 64 * 1024)
     }
-    ToolTip, %Hash%
+    ; ToolTip, %Hash%
     Clipboard := Hash
 Return

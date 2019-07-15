@@ -37,7 +37,6 @@ global szMenuIdx := {}             ;菜单用1
 global szMenuContent := {}         ;菜单用2
 global szMenuWhichFile := {}       ;菜单用3
 
-
 global love        := chr(9829)
 global copyright   := chr(169)
 
