@@ -29,6 +29,6 @@ Return
 
 Run_Cmder:
 	software = %cmder%
-	winclass = Cmder
+	winclass = VirtualConsoleClass
 	RunSoftware(winclass, software)
 Return

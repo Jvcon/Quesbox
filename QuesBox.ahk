@@ -2,7 +2,7 @@
 #WinActivateForce
 #MaxThreadsPerHotkey, 300
 #ClipboardTimeout, 500
-
+DetectHiddenWindows,on
 SetWorkingDir, %A_ScriptDir%
 Process Priority, , High
 SendMode Input                 
@@ -125,6 +125,7 @@ Return
     #Include %A_ScriptDir%\plugins\OpenDirectory.ahk
     #Include %A_ScriptDir%\plugins\HashCalc.ahk
     #Include %A_ScriptDir%\plugins\todo.ahk
+    #Include %A_ScriptDir%\plugins\Applications.ahk
 
 #If
     If (g_Conf.Module.Capslocks){
@@ -133,8 +134,6 @@ Return
         #Include %A_ScriptDir%\plugins\Capslocks_mstsc.ahk
         #Include %A_ScriptDir%\plugins\Capslocks_edit.ahk
     }
-; #If
-;     #Include %A_ScriptDir%\plugins\Windows10.ahk
 #If
     If (g_Conf.Module.Candy){
         #Include %A_ScriptDir%\plugins\Candy.ahk
