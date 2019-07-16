@@ -78,6 +78,7 @@ Label_Candy_Start:
     MouseGetPos,,,Candy_CurWin_id         ;当前鼠标下的进程ID
     WinGet, Candy_CurWin_Fullpath,ProcessPath,Ahk_ID %Candy_CurWin_id%    ;当前进程的路径
     WinGetTitle, Candy_Title,Ahk_ID %Candy_CurWin_id%    ;当前进程的标题
+    WinGetClass, Candy_Class,Ahk_ID %Candy_CurWin_id%
     Candy_Saved_ClipBoard := ClipboardAll
     Clipboard =
     Send, ^c
@@ -85,18 +86,20 @@ Label_Candy_Start:
     If ( ErrorLevel  )          ;如果没有选择到什么东西，则退出
     {
         ;~ Clipboard := Candy_Saved_ClipBoard    ;还原粘贴板
-        ;~ Candy_Saved_ClipBoard =
+        ;~ Candy_Saved_ClipBoar     qd =
         ;~ Return
-		IfWinExist, ahk_class TTOTAL_CMD
-        {	WinActivate
-			Totalcmd_GetPath()
-			temp := Totalcmd_GetPath()
-			Clipboard := Clipboard . "|RightMenu"
+		If (Candy_Class = "TTOTAL_CMD")
+        {
+			Clipboard := Totalcmd_GetPath() . "|RightMenu"
 		}
-		else
+		else If (Candy_Class = "CabinetWClass")
 		{
 			Clipboard:= Explorer_GetPath() . "|RightMenu"
 		}
+        else
+        {
+            Clipboard := Candy_Saved_ClipBoard
+        }
 	}
     Candy_isFile := DllCall("IsClipboardFormatAvailable", "UInt", 15)   ;是否是文件类型
     Candy_isHtml := DllCall("RegisterClipboardFormat", "str", "HTML Format")  ;是否Html类型
@@ -1122,10 +1125,8 @@ return Trim(ret,"`n")
 ╚══════════════════════════════════════╝
 */
 Totalcmd_GetPath(){
-	IfWinExist, ahk_class TTOTAL_CMD
-    {	
-		WinActivate
-		PostMessage 1075,2029,0,,ahk_class TTOTAL_CMD
-	}
-	return
+    SendTCCommand(2029)
+    Sleep, 200
+    temp := Clipboard
+	return temp
 }
