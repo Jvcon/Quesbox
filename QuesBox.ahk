@@ -140,7 +140,7 @@ Return
     #Include %A_ScriptDir%\plugins\Tray.ahk
     #Include %A_ScriptDir%\plugins\OpenDirectory.ahk
     #Include %A_ScriptDir%\plugins\HashCalc.ahk
-    #Include %A_ScriptDir%\plugins\todo.ahk
+    #Include %A_ScriptDir%\plugins\Todos.ahk
     #Include %A_ScriptDir%\plugins\Applications.ahk
 
 #If

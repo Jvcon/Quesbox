@@ -15,6 +15,16 @@ SwitchToDesktop(x){
 	Send % "^#{Left 10}^#{Right "(0 == x ? "^#d" : x - 1) "}"
 }
 
+win_Size_Zz(var_width,var_height){
+	WinMove,A,,,,%var_width%,%var_height%
+}
+
+win_Auto_hide_title(){
+	WinSet,Style,^0xC00000,A
+	WinSet,Style,^0×40000,A
+	return
+}
+
 #If (CapslocksStatus & Mode_Fn)
 	; 虚拟桌面
 	\:: send #{Tab}
@@ -64,7 +74,18 @@ SwitchToDesktop(x){
 		; WinGet, Var, Transparent, 150, A
 		WinSet, Transparent, 255, A
 		Return
-		
+	
+	; 窗口大小及移动
+	1::win_Size_Zz(A_ScreenWidth*0.5,A_ScreenHeight*0.5)
+	2::win_Size_Zz(A_ScreenWidth*0.5,A_ScreenHeight*0.7)
+	3::win_Size_Zz(A_ScreenWidth*0.8,A_ScreenHeight*0.8)
+	4::win_Size_Zz(A_ScreenWidth*0.8,A_ScreenHeight*0.9)
+	7::win_Size_Zz(A_ScreenWidth*0.3,A_ScreenHeight*0.3)
+	9::win_Size_Zz(650,384)
+	0::win_Size_Zz(340,200)
+	5::win_Auto_hide_title()
+
+
 #IfWinActive ahk_class MultitaskingViewFrame ; ahk_exe explorer.exe
     ; 在 Alt+Tab 下, WASD 模拟方向键 , 1803之后还可以用
     ; !a:: Left
