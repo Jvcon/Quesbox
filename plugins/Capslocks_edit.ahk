@@ -24,8 +24,8 @@
     +k::+Up               ;~ ↑ Select to the up
     +j::+Down             ;~ ↓ Select to the down
     
-    +n::^+Left
-    +m::^+Right
+    +n::^+Left            ;~ Select to the left word
+    +m::^+Right           ;~ Select to the right word
 
     +,::send, +{Home}     ;~ Select to end of line
     +.::send, +{End}      ;~ Select to end of line

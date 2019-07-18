@@ -76,22 +76,22 @@ win_Auto_hide_title(){
 		Return
 	
 	; 窗口大小及移动
-	1::win_Size_Zz(A_ScreenWidth*0.5,A_ScreenHeight*0.5)
-	2::win_Size_Zz(A_ScreenWidth*0.5,A_ScreenHeight*0.7)
-	3::win_Size_Zz(A_ScreenWidth*0.8,A_ScreenHeight*0.8)
-	4::win_Size_Zz(A_ScreenWidth*0.8,A_ScreenHeight*0.9)
-	7::win_Size_Zz(A_ScreenWidth*0.3,A_ScreenHeight*0.3)
-	9::win_Size_Zz(650,384)
-	0::win_Size_Zz(340,200)
-	5::win_Auto_hide_title()
+	; 1::win_Size_Zz(A_ScreenWidth*0.5,A_ScreenHeight*0.5)
+	; 2::win_Size_Zz(A_ScreenWidth*0.5,A_ScreenHeight*0.7)
+	; 3::win_Size_Zz(A_ScreenWidth*0.8,A_ScreenHeight*0.8)
+	; 4::win_Size_Zz(A_ScreenWidth*0.8,A_ScreenHeight*0.9)
+	; 7::win_Size_Zz(A_ScreenWidth*0.3,A_ScreenHeight*0.3)
+	; 9::win_Size_Zz(650,384)
+	; 0::win_Size_Zz(340,200)
+	; 5::win_Auto_hide_title()
 
 
 #IfWinActive ahk_class MultitaskingViewFrame ; ahk_exe explorer.exe
     ; 在 Alt+Tab 下, WASD 模拟方向键 , 1803之后还可以用
-    ; !a:: Left
-    ; !d:: Right
-    ; !w:: Up
-    ; !s:: Down
+    !a:: Left
+    !d:: Right
+    !w:: Up
+    !s:: Down
     ; qe 切换桌面
 	!q::
 		SendEvent {Blind}{Enter}
@@ -126,10 +126,10 @@ win_Auto_hide_title(){
 	; 以及在窗口贴边后，WASD 切换窗口焦点
 
     ; 模拟方向键
-    w:: Send {Up}
-    a:: Send {Left}
-    s:: Send {Down}
-    d:: Send {Right}
+    ; w:: Send {Up}
+    ; a:: Send {Left}
+    ; s:: Send {Down}
+    ; d:: Send {Right}
 
 	; 切换桌面概览
 	q:: Send ^#{Left}
