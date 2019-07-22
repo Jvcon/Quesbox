@@ -137,11 +137,15 @@ Return
 
     #Include %A_ScriptDir%\lib\EasyIni.ahk
     #Include %A_ScriptDir%\lib\Anchor.ahk
+	#Include %A_ScriptDir%\lib\Gdip_All.ahk
+	#Include %A_ScriptDir%\lib\JSON.ahk
+	#Include %A_ScriptDir%\lib\Vis2.ahk
     #Include %A_ScriptDir%\plugins\Tray.ahk
     #Include %A_ScriptDir%\plugins\OpenDirectory.ahk
     #Include %A_ScriptDir%\plugins\HashCalc.ahk
     #Include %A_ScriptDir%\plugins\Todos.ahk
     #Include %A_ScriptDir%\plugins\Applications.ahk
+
 
 #If
     If (g_Conf.Module.Capslocks){
@@ -159,4 +163,5 @@ Return
         #Include %A_ScriptDir%\plugins\Cando_Clipnote.ahk
         #Include %A_ScriptDir%\plugins\Cando_Create.ahk
         #Include %A_ScriptDir%\plugins\Cando_Hash.ahk
+		#Include %A_ScriptDir%\plugins\Cando_Vis.ahk
     }
