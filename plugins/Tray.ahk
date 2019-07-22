@@ -6,6 +6,7 @@
     Menu, Tray, Tip, QuesBox
     ;Menu, Tray, Add
     Menu, tray, add, 编辑全局配置,TrayHandle_GeneralSettings
+	Menu, tray, add, Capture and OCR(&O),Capture_OCR
     Menu, tray, add, Hash Calc(&C),HashCalc
     Menu, tray, add, Todo(&T),Todos
     Menu, Tray, Add, Directory(&D), TrayHandle_OpenSourceDir
@@ -46,6 +47,11 @@ Return
 Todos:
     ShowTodo()
 Return
+
+Capture_OCR:
+	OCR()
+Return
+
 /*
 ;   Open Directory
 */

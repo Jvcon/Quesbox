@@ -83,7 +83,7 @@ win_Auto_hide_title(){
 	; 7::win_Size_Zz(A_ScreenWidth*0.3,A_ScreenHeight*0.3)
 	; 9::win_Size_Zz(650,384)
 	; 0::win_Size_Zz(340,200)
-	; 5::win_Auto_hide_title()
+	 /::win_Auto_hide_title()
 
 
 #IfWinActive ahk_class MultitaskingViewFrame ; ahk_exe explorer.exe
