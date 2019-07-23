@@ -47,9 +47,9 @@
         Else{
             OutputDebug,isFinded=%isFinded%  未找到打开之
             If state = D ;在右侧打开
-                tc_cmd=`"%tc%`"  /O  /T  /R=`"%targetPath%`"
+                tc_cmd=`"%tc%`"  /O  /T  /R=`"%target%`"
             Else
-                tc_cmd=`"%tc%`"  /O  /T  /L=`"%targetPath%`"
+                tc_cmd=`"%tc%`"  /O  /T  /L=`"%target%`"
             Run %tc_cmd%
         }
     }
