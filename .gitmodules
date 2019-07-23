@@ -4,6 +4,3 @@
 [submodule "cl3"]
 	path = cl3
 	url = git@github.com:Jvcon/CL3.git
-[submodule "vis2"]
-	path = vis2
-	url = git@github.com:Jvcon/Vis2.git
