@@ -1,6 +1,0 @@
-[submodule "runz"]
-	path = runz
-	url = git@github.com:Jvcon/runz.git
-[submodule "cl3"]
-	path = cl3
-	url = git@github.com:Jvcon/CL3.git
