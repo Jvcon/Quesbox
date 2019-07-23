@@ -49,7 +49,8 @@ Todos:
 Return
 
 Capture_OCR:
-	OCR()
+	Clipboard := TextRecognize(,"eng+chi_sim",,{"previewBounds":false,"splashText":false})
+	msgbox % Clipboard
 Return
 
 /*
