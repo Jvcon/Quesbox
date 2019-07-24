@@ -1,6 +1,17 @@
-# Quesbox
+# Welcome to Quesbox 👋
+![Version](https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000) ![Prerequisite](https://img.shields.io/badge/ahk-1.1.30-green.svg) 
 
-A functional toolbox in Windows based on Autohokey
+🏠Quesbox:A functional toolbox in Windows based on Autohokey
+
+## Prerequisites
+
+- Autohotkey >= 1.1.30
+
+## Usage
+
+```
+git clone https://github.com/Jvcon/Quesbox.git
+```
 
 ## Function List
 
@@ -12,3 +23,5 @@ A functional toolbox in Windows based on Autohokey
 |OCR|| [iseahound/Vis2](https://github.com/iseahound/Vis2)|
 |Hash Calculate|| [jNizM/HashCalc](https://github.com/jNizM/HashCalc)|
 |TODO||[jdiamond/todo.txt-ahk](https://github.com/jdiamond/todo.txt-ahk)</br>[hi5/todo-pt](https://github.com/hi5/todo-pt)|
+
+## 📝 License
