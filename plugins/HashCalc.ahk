@@ -68,7 +68,7 @@ ShowHashWindow:
     Gui, hashcalcGui: Add, Text, xm y+10 w586 h1 0x10
 
     Gui, hashcalcGui: Font, cSilver,
-    Gui, hashcalcGui: Add, Text, xm y+10 w300 h21 0x200, made with %love% and AHK 2013-%A_YYYY%, jNizM
+    Gui, hashcalcGui: Add, Text, xm y+10 w300 h21 0x200, made with AHK 2013-%A_YYYY%, jNizM
     Gui, hashcalcGui: Font,,
     Gui, hashcalcGui: Add, Button, x+36 yp-1 w80 gCalculate, Calculate
     Gui, hashcalcGui: Add, Button, x+3 yp w80 gClear, Clear
