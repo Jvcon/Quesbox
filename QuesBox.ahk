@@ -37,17 +37,7 @@ if !FileExist(g_ConfFile)
 {
     FileCopy, %g_ConfFile%.help.txt, %g_ConfFile%
 }
-global Str:=
-global HMAC:=
-global CRC32:=
-global MD2:=
-global MD4:=
-global MD5:=
-global SHA:=
-global SHA2:=
-global SHA3:=
-global SHA5:=
-global Verify:=
+
 global g_Conf := class_EasyIni(g_ConfFile)
 
 global love := chr(9829)
