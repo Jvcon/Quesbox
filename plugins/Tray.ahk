@@ -13,11 +13,12 @@
         Menu, tray, Uncheck, Double Pinyin
     }
     Menu, tray, add
-	Menu, tray, add, Capture and OCR(&O),Capture_OCR
-    Menu, tray, add, Hash Calc(&C),HashCalc
-    Menu, tray, add, Todo(&T),Todos
+    Menu, tray, add, Test, TestCalc
+	Menu, tray, add, Capture and OCR(&O), Capture_OCR
+    Menu, tray, add, Hash Calc(&C), HashCalc
+    Menu, tray, add, Todo(&T), Todos
     Menu, tray, add
-    Menu, tray, add, Global Settings,TrayHandle_GeneralSettings
+    Menu, tray, add, Global Settings, TrayHandle_GeneralSettings
     Menu, Tray, Add, Directory(&D), TrayHandle_OpenSourceDir
     Menu, Tray, Add, Restart(&R)`tCtrl + Alt + R, TrayHandle_ReLoad
     Menu, Tray, Add, Exit(&E)`tCtrl + Alt + X, TrayHandle_Exit

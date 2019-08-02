@@ -1,68 +1,69 @@
 ﻿cando_stringHash:
     type=%A_ThisMenuItem%
+    Str=%CandySel%
     if (type="MD2")
     {
-        Hash := CalcStringHash(CandySel, 0x8001, encoding = "UTF-8")
+        Hash := MD2(Str)
     }
     if type=="MD4"
     {   
-        Hash := CalcStringHash(CandySel, 0x8002, encoding = "UTF-8")
+        Hash := MD4(Str)
     }
     if type=="MD5"
     {
-         Hash := CalcStringHash(CandySel, 0x8003, encoding = "UTF-8")
+         Hash := MD5(Str)
     }
     if type=="SHA-1"
     {
-        Hash := CalcStringHash(CandySel, 0x8004, encoding = "UTF-8")
+        Hash := SHA(Str)
     }
     if type=="SHA-256"
     {
-        Hash := CalcStringHash(CandySel, 0x800c, encoding = "UTF-8")
+        Hash := SHA256(Str)
     }
     if type=="SHA-384"
     {
-        Hash := CalcStringHash(CandySel, 0x800d, encoding = "UTF-8")
+        Hash := SHA384(Str)
     }
     if type=="SHA-512"
     {
-        Hash := CalcStringHash(CandySel, 0x800e, encoding = "UTF-8")
+        Hash := SHA512(Str)
     }
-    ToolTip, %Hash%
+    MsgBox, %Hash%
     Clipboard := Hash
 Return
 
 cando_fileHash:
     type=%A_ThisMenuItem%
-    MsgBox, , , %CandySel%
+    Str=%CandySel%
     if (type="MD2")
     {
-        Hash := CalcFileHash(CandySel, 0x8001, 64 * 1024)
+        Hash := FileMD2(Str)
     }
     if type=="MD4"
     {
-         Hash := CalcFileHash(CandySel, 0x8002, 64 * 1024)
+         Hash := FileMD4(Str)
     }
     if type=="MD5"
     {
-         Hash := CalcFileHash(CandySel, 0x8003, 64 * 1024)
+         Hash := FileMD5(Str)
     }
     if type=="SHA-1"
     {
-        Hash := CalcFileHash(CandySel, 0x8004, 64 * 1024)
+        Hash := FileSHA(Str)
     }
     if type=="SHA-256"
     {
-        Hash := CalcFileHash(CandySel, 0x800c, 64 * 1024)
+        Hash := FileSHA256(Str)
     }
     if type=="SHA-384"
     {
-        Hash := CalcFileHash(CandySel, 0x800d, 64 * 1024)
+        Hash := FileSHA384(Str)
     }
     if type=="SHA-512"
     {
-        Hash := CalcFileHash(CandySel, 0x800e, 64 * 1024)
+        Hash := FileSHA512(Str)
     }
-    ; ToolTip, %Hash%
+    MsgBox, %Hash%
     Clipboard := Hash
 Return
