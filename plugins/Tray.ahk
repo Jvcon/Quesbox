@@ -74,12 +74,13 @@ if Pinyin_Status{
     RegWrite, REG_DWORD, HKCU\SOFTWARE\Microsoft\InputMethod\Settings\CHS, Enable Double Pinyin, 0
     ToolTip , Full Pinyin
     SetTimer, RemoveTooltip, -5000
+    Menu, tray, Uncheck, Double Pinyin
 }else{
     RegWrite, REG_DWORD, HKCU\SOFTWARE\Microsoft\InputMethod\Settings\CHS, Enable Double Pinyin, 1
     ToolTip , Double Pinyin
     SetTimer, RemoveTooltip, -5000
+    Menu, tray, Check, Double Pinyin
 }
-Sub_CreateTrayMenu()
 Return
 
 RemoveTooltip:
