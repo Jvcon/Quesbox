@@ -68,14 +68,14 @@ ShowHashWindow:
     Gui, hashcalcGui: Add, Text, xm y+10 w586 h1 0x10
 
     Gui, hashcalcGui: Font, cSilver,
-    Gui, hashcalcGui: Add, Text, xm y+10 w300 h21 0x200, made with AHK 2013-%A_YYYY%, jNizM
+    Gui, hashcalcGui: Add, Text, xm y+10 w300 h21 0x200, made with %love% and AHK 2013-%A_YYYY%, jNizM
     Gui, hashcalcGui: Font,,
     Gui, hashcalcGui: Add, Button, x+36 yp-1 w80 gCalculate, Calculate
     Gui, hashcalcGui: Add, Button, x+3 yp w80 gClear, Clear
     Gui, hashcalcGui: Add, Button, x+3 yp w80 gClose, Close
 
     ; Gui, hashcalcGui: Show, AutoSize, HashCalc
-
+    Gosub CheckEdit
     SetTimer, CheckEdit, 100
     SetTimer, VerifyHash, 200
 return
@@ -133,6 +133,7 @@ Calculate:
     GuiControl,, SHA2,  % ((CheckSHA2  = "1") ? ((DDL = "1") ? ((Check = "0") ? (SHA256(Str)) : (HMAC(HMAC, Str, "SHA256"))) : ((DDL = "2") ? (HexSHA256(Str)) : (FileSHA256(Str)))) : (""))
     GuiControl,, SHA3,  % ((CheckSHA3  = "1") ? ((DDL = "1") ? ((Check = "0") ? (SHA384(Str)) : (HMAC(HMAC, Str, "SHA384"))) : ((DDL = "2") ? (HexSHA384(Str)) : (FileSHA384(Str)))) : (""))
     GuiControl,, SHA5,  % ((CheckSHA5  = "1") ? ((DDL = "1") ? ((Check = "0") ? (SHA512(Str)) : (HMAC(HMAC, Str, "SHA512"))) : ((DDL = "2") ? (HexSHA512(Str)) : (FileSHA512(Str)))) : (""))
+    Gosub CheckEdit
 return
 
 Clear:
@@ -157,27 +158,35 @@ VerifyHash:
 return
 
 CopyCRC32:
+    Gosub Calculate
     Clipboard := CRC32
 return
 CopyMD2:
+    Gosub Calculate
     Clipboard := MD2
 return
 CopyMD4:
+    Gosub Calculate
     Clipboard := MD4
 return
 CopyMD5:
+    Gosub Calculate
     Clipboard := MD5
 return
 CopySHA:
+    Gosub Calculate
     Clipboard := SHA
 return
 CopySHA2:
+    Gosub Calculate
     Clipboard := SHA2
 return
 CopySHA3:
+    Gosub Calculate
     Clipboard := SHA3
 return
 CopySHA5:
+    Gosub Calculate
     Clipboard := SHA5
 return
 
