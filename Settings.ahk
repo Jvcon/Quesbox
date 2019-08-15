@@ -35,12 +35,8 @@ g_setting =
       "ahk2exe": "d:\\Applications\\Scoop\\apps\\autohotkey\\current\\Compiler\\Ahk2Exe.exe",
       "spy": "d:\\Applications\\Scoop\\apps\\autohotkey\\current\\WindowSpy.ahk",
       "ahkhelp": "d:\\Applications\\Scoop\\apps\\autohotkey\\current\\AutoHotkey.chm",
-      "wechat": "C:\\Program Files (x86)\\Tencent\\WeChat\\WeChat.exe"
-  },
-  "winclass":{
-    "wechat":"WeChatMainWndForPC",
-    "tc":"TTOTAL_CMD",
-    "cmder":"VirtualConsoleClass"
+      "wechat": "C:\\Program Files (x86)\\Tencent\\WeChat\\WeChat.exe",
+      "tim": "C:\\Program Files (x86)\\Tencent\\TIM\\Bin\\QQScLauncher.exe"
   }
 }
 )

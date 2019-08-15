@@ -17,6 +17,7 @@
 	Menu, tray, add, Capture and OCR(&O), Capture_OCR
     Menu, tray, add, Hash Calc(&C), HashCalc
     Menu, tray, add, Todo(&T), Todos
+    Menu, tray, add, Windows Spy(&S), Run_WinSpy
     Menu, tray, add
     Menu, tray, add, Global Settings, TrayHandle_GeneralSettings
     Menu, Tray, Add, Directory(&D), TrayHandle_OpenSourceDir
@@ -56,6 +57,10 @@ Return
 
 Todos:
     ShowTodo()
+Return
+
+Run_WinSpy:
+    Run, %A_ScriptDir%\QuesBox.exe %spy%
 Return
 
 Capture_OCR:

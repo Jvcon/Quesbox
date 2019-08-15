@@ -6,21 +6,23 @@ ActiveandRun(winclass,software)
 {
 	DetectHiddenWindows, on 
 	IfWinExist ahk_class %winclass%
+		WinShow ahk_class %winclass%
 		IfWinNotActive ahk_class %winclass%
-			WinActivate
+			WinActivate ahk_class %winclass%
 		else
+		IfWinActive ahk_class %winclass%
 			WinMinimize ahk_class %winclass%
 	else 
 		Run, %software%
 }
 
 #IF
-	#w::
-		ActiveandRun(winclass_wechat,wechat)
-	Return
 	#e::
-		ActiveandRun(winclass_tc,tc)
+		ActiveandRun("TTOTAL_CMD",tc)
 	Return
 	#r::
-		ActiveandRun(winclass_cmder,cmder)
+		ActiveandRun("VirtualConsoleClass",cmder)
+	Return
+	#w::
+		ActiveandRun("WeChatMainWndForPC",wechat)
 	Return

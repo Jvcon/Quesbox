@@ -60,11 +60,6 @@ for key, label in g_setting.software
     %key%=%label%
 }
 
-for key, label in g_setting.winclass
-{
-    winclass_%key%=%label%
-}
-
 global g_ConfFile := A_ScriptDir . "\config\GeneralSettings.ini"
 
 if !FileExist(g_ConfFile)
