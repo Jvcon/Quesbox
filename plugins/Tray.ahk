@@ -18,6 +18,7 @@
     Menu, tray, add, Hash Calc(&C), HashCalc
     Menu, tray, add, Todo(&T), Todos
     Menu, tray, add, Windows Spy(&S), Run_WinSpy
+    Menu, tray, add, WhoLockedMe(&L), Run_WhoLockedMe
     Menu, tray, add
     Menu, tray, add, Global Settings, TrayHandle_GeneralSettings
     Menu, Tray, Add, Directory(&D), TrayHandle_OpenSourceDir
@@ -61,6 +62,10 @@ Return
 
 Run_WinSpy:
     Run, %A_ScriptDir%\QuesBox.exe %spy%
+Return
+
+Run_WhoLockedMe:
+    Run, %A_ScriptDir%\Quesbox.exe %A_ScriptDir%\plugins\WhoLockedMe.ahk
 Return
 
 Capture_OCR:
