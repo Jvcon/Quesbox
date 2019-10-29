@@ -2,33 +2,33 @@
     type=%A_ThisMenuItem%
     if (type="MD2")
     {
-        Hash := CalcStringHash(CandySel, 0x8001, encoding = "UTF-8")
+        Hash := MD2(Candysel)
     }
-    if type=="MD4"
+    if (type=="MD4")
     {   
-        Hash := CalcStringHash(CandySel, 0x8002, encoding = "UTF-8")
+        Hash := MD4(CandySel)
     }
-    if type=="MD5"
+    if (type=="MD5")
     {
-         Hash := CalcStringHash(CandySel, 0x8003, encoding = "UTF-8")
+        Hash := MD5(CandySel)
     }
-    if type=="SHA-1"
+    if (type=="SHA-1")
     {
-        Hash := CalcStringHash(CandySel, 0x8004, encoding = "UTF-8")
+        Hash := SHA(CandySel)
     }
-    if type=="SHA-256"
+    if (type=="SHA-256")
     {
-        Hash := CalcStringHash(CandySel, 0x800c, encoding = "UTF-8")
+        Hash := SHA256(CandySel)
     }
-    if type=="SHA-384"
+    if (type=="SHA-384")
     {
-        Hash := CalcStringHash(CandySel, 0x800d, encoding = "UTF-8")
+        Hash := SHA384(CandySel)
     }
-    if type=="SHA-512"
+    if (type=="SHA-512")
     {
-        Hash := CalcStringHash(CandySel, 0x800e, encoding = "UTF-8")
+        Hash := SHA512(CandySel)
     }
-    ToolTip, %Hash%
+    ;ToolTip, %Hash%
     Clipboard := Hash
 Return
 
@@ -37,31 +37,31 @@ cando_fileHash:
     MsgBox, , , %CandySel%
     if (type="MD2")
     {
-        Hash := CalcFileHash(CandySel, 0x8001, 64 * 1024)
+        Hash := FileMD2(CandySel)
     }
-    if type=="MD4"
+    if (type=="MD4")
     {
-         Hash := CalcFileHash(CandySel, 0x8002, 64 * 1024)
+         Hash := FileMD4(CandySel)
     }
-    if type=="MD5"
+    if (type=="MD5")
     {
-         Hash := CalcFileHash(CandySel, 0x8003, 64 * 1024)
+         Hash := FileMD5(CandySel)
     }
-    if type=="SHA-1"
+    if (type=="SHA-1")
     {
-        Hash := CalcFileHash(CandySel, 0x8004, 64 * 1024)
+        Hash := FileSHA(CandySel)
     }
-    if type=="SHA-256"
+    if (type=="SHA-256")
     {
-        Hash := CalcFileHash(CandySel, 0x800c, 64 * 1024)
+        Hash := FileSHA256(CandySel)
     }
-    if type=="SHA-384"
+    if (type=="SHA-384")
     {
-        Hash := CalcFileHash(CandySel, 0x800d, 64 * 1024)
+        Hash := FileSHA384(CandySel)
     }
-    if type=="SHA-512"
+    if (type=="SHA-512")
     {
-        Hash := CalcFileHash(CandySel, 0x800e, 64 * 1024)
+        Hash := FileSHA512(CandySel)
     }
     ; ToolTip, %Hash%
     Clipboard := Hash
