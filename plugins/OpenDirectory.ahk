@@ -201,10 +201,3 @@ activeTC(tc, targetNum){
     }
     PostMessage 1075, %targetNum%, 0, , AHK_CLASS TTOTAL_CMD	;ActiveTab
 }
-
-sendTCCommand( CommandID, xbWait=1 )
-  { If (xbWait)
-        SendMessage 1075, %CommandID%, 0, , ahk_class TTOTAL_CMD
-    Else
-        PostMessage 1075, %CommandID%, 0, , ahk_class TTOTAL_CMD
-  }
